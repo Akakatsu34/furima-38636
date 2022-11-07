@@ -17,4 +17,10 @@ ActiveRecord::Schema.define(version: 2022_11_07_084200) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
 end
