@@ -12,8 +12,8 @@ class Item < ApplicationRecord
     validates :price, inclusion: { in: 300..9_999_999 }
   end
 
-  validates :name,                 presence: true
-  validates :describe,             presence: true
+  validates :name,                 presence: true, length: { maximum: 40   }
+  validates :describe,             presence: true, length: { maximum: 1000 }
   validates :category_id,          presence: true, numericality: { other_than: 1 , message: "can't be blank"}
   validates :condition_id,         presence: true, numericality: { other_than: 1 , message: "can't be blank"}
   validates :shipping_charge_id,   presence: true, numericality: { other_than: 1 , message: "can't be blank"}
