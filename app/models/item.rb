@@ -8,6 +8,9 @@ class Item < ApplicationRecord
   belongs_to :delivery_duration
   has_one_attached :image
 
+  with_options presence: true, format: { with: /\A[0-9]+\z/ } do
+    validates :price, inclusion: { in: 300..9_999_999 }
+  end
 
   validates :name,                 presence: true
   validates :describe,             presence: true
@@ -16,6 +19,5 @@ class Item < ApplicationRecord
   validates :shipping_charge_id,   presence: true, numericality: { other_than: 1 , message: "can't be blank"}
   validates :ship_from_id,         presence: true, numericality: { other_than: 1 , message: "can't be blank"}
   validates :delivery_duration_id, presence: true, numericality: { other_than: 1 , message: "can't be blank"}
-  validates :price,                presence: true
-  validates :user,                 presence: true
+  validates :image,      presence: true
 end
