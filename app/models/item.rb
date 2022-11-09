@@ -8,10 +8,6 @@ class Item < ApplicationRecord
   belongs_to :delivery_duration
   has_one_attached :image
 
-  with_options presence: true, format: { with: /\A[0-9]+\z/ } do
-    validates :price, inclusion: { in: 300..9_999_999 }
-  end
-
   validates :name,                 presence: true, length: { maximum: 40   }
   validates :describe,             presence: true, length: { maximum: 1000 }
   validates :category_id,          presence: true, numericality: { other_than: 1 , message: "can't be blank"}
@@ -19,5 +15,8 @@ class Item < ApplicationRecord
   validates :shipping_charge_id,   presence: true, numericality: { other_than: 1 , message: "can't be blank"}
   validates :ship_from_id,         presence: true, numericality: { other_than: 1 , message: "can't be blank"}
   validates :delivery_duration_id, presence: true, numericality: { other_than: 1 , message: "can't be blank"}
+  validates :price,                presence: true
+  validates :price, numericality: {only_integer: true, message: 'Half-width number'}
+  validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "is out of setting range"}
   validates :image,      presence: true
 end
