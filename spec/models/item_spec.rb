@@ -6,12 +6,12 @@ RSpec.describe Item, type: :model do
   end
 
   describe '商品の保存' do
-    context "商品が保存できる場合" do
-      it "すべての記載があれば商品は保存される" do
+    context '商品が保存できる場合' do
+      it 'すべての記載があれば商品は保存される' do
         expect(@item).to be_valid
       end
     end
-    context "商品が保存できない場合" do
+    context '商品が保存できない場合' do
       it 'nameが空では登録できない' do
         @item.name = ''
         @item.valid?
@@ -20,7 +20,7 @@ RSpec.describe Item, type: :model do
       it 'nameが40文字より上は登録できない' do
         @item.name = 'a' * 41
         @item.valid?
-        expect(@item.errors.full_messages).to include "Name is too long (maximum is 40 characters)"
+        expect(@item.errors.full_messages).to include 'Name is too long (maximum is 40 characters)'
       end
       it 'describeが空では登録できない' do
         @item.describe = ''
@@ -30,7 +30,7 @@ RSpec.describe Item, type: :model do
       it 'describeが1000文字より上は登録できない' do
         @item.describe = 'a' * 1001
         @item.valid?
-        expect(@item.errors.full_messages).to include "Describe is too long (maximum is 1000 characters)"
+        expect(@item.errors.full_messages).to include 'Describe is too long (maximum is 1000 characters)'
       end
       it 'category_idが---では登録できない' do
         @item.category_id = 1
@@ -65,17 +65,17 @@ RSpec.describe Item, type: :model do
       it 'priceが300より下では登録できない' do
         @item.price = 200
         @item.valid?
-        expect(@item.errors.full_messages).to include "Price is out of setting range"
+        expect(@item.errors.full_messages).to include 'Price is out of setting range'
       end
       it 'priceが9999999より上では登録できない' do
-        @item.price = 10000000
+        @item.price = 10_000_000
         @item.valid?
-        expect(@item.errors.full_messages).to include "Price is out of setting range"
+        expect(@item.errors.full_messages).to include 'Price is out of setting range'
       end
       it 'priceが全角数字では登録できない' do
         @item.price = '３００００'
         @item.valid?
-        expect(@item.errors.full_messages).to include "Price Half-width number"
+        expect(@item.errors.full_messages).to include 'Price Half-width number'
       end
       it 'userが紐付いていないと商品は保存できない' do
         @item.user = nil
