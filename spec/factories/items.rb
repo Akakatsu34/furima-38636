@@ -1,14 +1,14 @@
 FactoryBot.define do
   factory :item do
     Faker::Config.locale = 'ja'
-    name                  { Faker::Name.name }
+    name                  { Faker::Lorem.word }
     describe              { Faker::Lorem.sentence }
-    category_id           { 2 }
-    condition_id          { 2 }
-    shipping_charge_id    { 2 }
-    ship_from_id          { 2 }
-    delivery_duration_id  { 2 }
-    price                 { 40_000 }
+    category_id           { Faker::Number.between(from: 2, to: 11)  }
+    condition_id          { Faker::Number.between(from: 2, to: 7) }
+    shipping_charge_id    { Faker::Number.between(from: 2, to: 3) }
+    ship_from_id          { Faker::Number.between(from: 2, to: 48) }
+    delivery_duration_id  { Faker::Number.between(from: 2, to: 4) }
+    price                 { Faker::Number.between(from: 300, to: 9999999) }
     association :user
 
     after(:build) do |item|
