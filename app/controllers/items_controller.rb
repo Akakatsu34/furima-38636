@@ -36,7 +36,7 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-      item = Item.find(params[:id])
+    item = Item.find(params[:id])
     if current_user.id == item.user_id
       item.destroy
       redirect_to action: :index
@@ -66,15 +66,15 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    unless user_signed_in?
-      redirect_to action: :index
-    end
+    return if user_signed_in?
+
+    redirect_to action: :index
   end
 
   def correct_item
-   @item = Item.find(params[:id])
-   unless @item.user.id == current_user.id
-    redirect_to action: :index    
-   end
+    @item = Item.find(params[:id])
+    return if @item.user.id == current_user.id
+
+    redirect_to action: :index
   end
 end

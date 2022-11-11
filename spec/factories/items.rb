@@ -3,12 +3,12 @@ FactoryBot.define do
     Faker::Config.locale = 'ja'
     name                  { Faker::Lorem.word }
     describe              { Faker::Lorem.sentence }
-    category_id           { Faker::Number.between(from: 2, to: 11)  }
+    category_id           { Faker::Number.between(from: 2, to: 11) }
     condition_id          { Faker::Number.between(from: 2, to: 7) }
     shipping_charge_id    { Faker::Number.between(from: 2, to: 3) }
     ship_from_id          { Faker::Number.between(from: 2, to: 48) }
     delivery_duration_id  { Faker::Number.between(from: 2, to: 4) }
-    price                 { Faker::Number.between(from: 300, to: 9999999) }
+    price                 { Faker::Number.between(from: 300, to: 9_999_999) }
     association :user
 
     after(:build) do |item|
