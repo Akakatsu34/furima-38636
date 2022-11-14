@@ -3,6 +3,7 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:edit, :show, :update]
   before_action :move_to_index, except: [:index, :show]
   before_action :correct_item, only: :edit
+  before_action :sold_out_item, only: :edit
 
   def index
     @items = Item.includes(:user).order('created_at DESC')
@@ -76,5 +77,12 @@ class ItemsController < ApplicationController
     return if @item.user.id == current_user.id
 
     redirect_to action: :index
+  end
+
+  def sold_out_item
+    @item = Item.find(params[:id])
+    if @item.order.present?
+      redirect_to action: :index
+    end
   end
 end
