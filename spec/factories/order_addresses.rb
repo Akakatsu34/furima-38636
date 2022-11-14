@@ -8,5 +8,4 @@ FactoryBot.define do
     building_name  { Faker::Address.street_name}
     phone_number   { '09012345678' }
   end
-  end
 end
