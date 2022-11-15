@@ -37,14 +37,12 @@ class OrdersController < ApplicationController
   end
 
   def seller_cannot_buy
-    @item = Item.find(params[:item_id])
     return unless current_user == @item.user
 
     redirect_to root_path
   end
 
   def sold_out_item
-    @item = Item.find(params[:item_id])
     return unless @item.order.present?
 
     redirect_to root_path
