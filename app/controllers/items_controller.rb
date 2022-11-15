@@ -73,16 +73,14 @@ class ItemsController < ApplicationController
   end
 
   def correct_item
-    @item = Item.find(params[:id])
     return if @item.user.id == current_user.id
 
     redirect_to action: :index
   end
 
   def sold_out_item
-    @item = Item.find(params[:id])
-    if @item.order.present?
-      redirect_to action: :index
-    end
+    return unless @item.order.present?
+
+    redirect_to action: :index
   end
 end
